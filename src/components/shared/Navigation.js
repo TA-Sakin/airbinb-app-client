@@ -7,7 +7,7 @@ const Navigation = () => {
   const { currentUser: user, logout } = useAuth();
   return (
     <div>
-      <div className="navbar bg-base-100 px-20 shadow-md z-100 sticky">
+      <div className="navbar bg-base-100 lg:px-20 md:px-16 px-8 shadow-md z-100 sticky top-0">
         <div className="flex-1">
           <Link to="/">
             <span className="cursor-pointer normal-case text-xl font-semibold">

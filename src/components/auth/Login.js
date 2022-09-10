@@ -76,7 +76,7 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       setPopupLoading(false);
-      setErrors(err)
+      setError(err);
     }
   };
 
