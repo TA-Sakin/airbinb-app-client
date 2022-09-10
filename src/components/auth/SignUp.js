@@ -1,11 +1,14 @@
 import React, { Fragment, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import Loading from "../shared/Loading";
 
 const Signup = () => {
-  const { currentUser, signup } = useAuth();
+  const { currentUser, signup, googleSignIn } = useAuth();
+  const [popupLoading, setPopupLoading] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -92,6 +95,16 @@ const Signup = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      setPopupLoading(true);
+      await googleSignIn();
+      navigate("/");
+    } catch (err) {
+      setPopupLoading(false);
+      setError(err);
+    }
+  };
   useEffect(() => {
     if (error) {
       switch (error?.code) {
@@ -110,7 +123,9 @@ const Signup = () => {
       }
     }
   }, [error]);
-
+  if (popupLoading) {
+    return <Loading />;
+  }
   return (
     <Fragment>
       <div className="max-w-sm mx-auto my-20 bg-white p-8 rounded-xl shadow-lg shadow-slate-300">
@@ -218,6 +233,14 @@ const Signup = () => {
             </p>
           </div>
         </form>
+        <div className="divider">OR</div>
+        <button
+          onClick={handleGoogleLogin}
+          className="btn btn-outline btn-[#89d6fb] w-full"
+        >
+          <FcGoogle className="text-2xl mr-2" />
+          Continue with Google
+        </button>
       </div>
     </Fragment>
   );

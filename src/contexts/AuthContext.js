@@ -5,6 +5,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
 import Loading from "../components/shared/Loading";
@@ -18,6 +20,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
+  const provider = new GoogleAuthProvider();
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
@@ -46,6 +50,9 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
+  function googleSignIn() {
+    return signInWithPopup(auth, provider);
+  }
   //reset password
   function resetPassword(email) {
     return sendPasswordResetEmail(auth, email);
@@ -63,6 +70,7 @@ export function AuthProvider({ children }) {
     logout,
     login,
     resetPassword,
+    googleSignIn,
   };
 
   return (

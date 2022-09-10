@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../contexts/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
+import Loading from "../shared/Loading";
 
 const Login = () => {
-  const { resetPassword, login } = useAuth();
+  const { resetPassword, login, googleSignIn } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [popupLoading, setPopupLoading] = useState(false);
   const [error, setError] = useState();
   const [passwordResetError, setPasswordResetError] = useState();
 
@@ -52,8 +55,7 @@ const Login = () => {
     try {
       if (!info.email) {
         setErrors({ ...errors, email: "Enter your email" });
-      }
-      if (!info.password) {
+      } else if (!info.password) {
         setErrors({ ...errors, password: "Enter your password" });
       } else {
         setError("");
@@ -64,6 +66,17 @@ const Login = () => {
     } catch (err) {
       setLoading(false);
       setError(err);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      setPopupLoading(true);
+      await googleSignIn();
+      navigate("/");
+    } catch (err) {
+      setPopupLoading(false);
+      setErrors(err)
     }
   };
 
@@ -103,13 +116,15 @@ const Login = () => {
         default:
           setErrors((errors) => ({
             ...errors,
-            infoError: "Something went wrong",
+            infoError: `${error.code.slice(5)}`,
           }));
           break;
       }
     }
   }, [error]);
-
+  if (popupLoading) {
+    return <Loading />;
+  }
   return (
     <section className="">
       <div className="max-w-sm mx-auto my-20 bg-white p-8 rounded-xl shadow-lg shadow-slate-300">
@@ -192,6 +207,14 @@ const Login = () => {
             </p>
           </div>
         </form>
+        <div className="divider">OR</div>
+        <button
+          onClick={handleGoogleLogin}
+          className="btn btn-outline btn-[#89d6fb] w-full"
+        >
+          <FcGoogle className="text-2xl mr-2" />
+          Continue with Google
+        </button>
       </div>
       <ToastContainer />
     </section>
