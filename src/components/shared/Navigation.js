@@ -28,18 +28,36 @@ const Navigation = () => {
               tabindex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <Link to="/dashboard/profile" className="justify-between">
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <span className="justify-between">Login</span>
-              </li>
+              {user ? (
+                <>
+                  <li>
+                    <Link to="/dashboard/profile" className="justify-between">
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <span className="justify-between">Logout</span>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login" className="justify-between">
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/signup" className="justify-between">
+                      Signup
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };
