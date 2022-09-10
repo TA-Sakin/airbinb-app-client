@@ -3,18 +3,18 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/SignUp";
-import Navigation from "./components/shared/Navigation";
+import Navigation from "./components/Header/Navigation";
 import PageNotFound from "./components/shared/PageNotFound";
 import "react-toastify/dist/ReactToastify.css";
 import PublicRoute from "./components/auth/PublicRoute";
-import PropertyList from "./components/Home/PropertyList";
+import Home from "./components/Home/Home";
+import PropertyDetails from "./components/Details/PropertyDetails";
 
 function App() {
   return (
     <Fragment>
-      <Navigation />
       <Routes>
-        <Route path="/" element={<PropertyList />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route
           path="/login"
           element={
@@ -31,6 +31,7 @@ function App() {
             </PublicRoute>
           }
         ></Route>
+        <Route path="/details/:id" element={<PropertyDetails />}></Route>
         <Route path="/*" element={<PageNotFound />}></Route>
       </Routes>
     </Fragment>
