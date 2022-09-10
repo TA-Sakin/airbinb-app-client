@@ -5,7 +5,7 @@ import {
 } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
 import Loading from "../components/shared/Loading";
-import auth from "../Utils/firebase.init";
+import auth from "../utils/firebase.init";
 const AuthContext = React.createContext();
 
 export function useAuth() {
