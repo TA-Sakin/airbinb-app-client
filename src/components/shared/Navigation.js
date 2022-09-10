@@ -2,26 +2,25 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { FaUserCircle } from "react-icons/fa";
+import { VscThreeBars } from "react-icons/vsc";
 const Navigation = () => {
-  const { currentUser: user } = useAuth();
+  const { currentUser: user, logout } = useAuth();
   return (
     <div>
-      <div className="navbar bg-base-100 px-10 shadow-md z-30 sticky">
+      <div className="navbar bg-base-100 px-20 shadow-md z-100 sticky">
         <div className="flex-1">
           <Link to="/">
-            <span className="btn btn-ghost no-animation normal-case text-xl">
+            <span className="cursor-pointer normal-case text-xl font-semibold">
               Airbnb App
             </span>
           </Link>
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
-            <label
-              tabIndex="0"
-              className="btn btn-ghost btn-circle avatar placeholder"
-            >
-              <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
-                <FaUserCircle />
+            <label tabIndex="0" className="">
+              <div className="flex cursor-pointer border-[1px] w-20 py-[5px] rounded-3xl items-center justify-evenly hover:shadow-md">
+                <VscThreeBars className="text-lg" />
+                <FaUserCircle className="text-3xl text-gray-500" />
               </div>
             </label>
             <ul
@@ -36,7 +35,9 @@ const Navigation = () => {
                     </Link>
                   </li>
                   <li>
-                    <span className="justify-between">Logout</span>
+                    <span className="justify-between" onClick={() => logout()}>
+                      Logout
+                    </span>
                   </li>
                 </>
               ) : (

@@ -2,6 +2,9 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
 import Loading from "../components/shared/Loading";
@@ -38,10 +41,28 @@ export function AuthProvider({ children }) {
     });
   }
 
+  // login function
+  function login(email, password) {
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+
+  //reset password
+  function resetPassword(email) {
+    return sendPasswordResetEmail(auth, email);
+  }
+
+  function logout() {
+    localStorage.removeItem("accessToken");
+    return signOut(auth);
+  }
+
   const value = {
     loading,
     currentUser,
     signup,
+    logout,
+    login,
+    resetPassword,
   };
 
   return (

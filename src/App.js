@@ -5,6 +5,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/SignUp";
 import Navigation from "./components/shared/Navigation";
 import PageNotFound from "./components/shared/PageNotFound";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
