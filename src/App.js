@@ -6,14 +6,29 @@ import Signup from "./components/auth/SignUp";
 import Navigation from "./components/shared/Navigation";
 import PageNotFound from "./components/shared/PageNotFound";
 import "react-toastify/dist/ReactToastify.css";
+import PublicRoute from "./components/auth/PublicRoute";
 
 function App() {
   return (
     <Fragment>
       <Navigation />
       <Routes>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/signup" element={<Signup />}></Route>
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          }
+        ></Route>
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          }
+        ></Route>
         <Route path="/*" element={<PageNotFound />}></Route>
       </Routes>
     </Fragment>
