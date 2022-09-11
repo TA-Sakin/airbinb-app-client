@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
 import Loading from "../components/shared/Loading";
+import useToken from "../hooks/useToken";
 import auth from "../utils/firebase.init";
 const AuthContext = React.createContext();
 
@@ -53,7 +54,9 @@ export function AuthProvider({ children }) {
   function googleSignIn() {
     return signInWithPopup(auth, provider);
   }
-  //reset password
+
+  const [token] = useToken(currentUser)
+  //forget password
   function resetPassword(email) {
     return sendPasswordResetEmail(auth, email);
   }
@@ -70,7 +73,7 @@ export function AuthProvider({ children }) {
     logout,
     login,
     resetPassword,
-    googleSignIn,
+    googleSignIn,token
   };
 
   return (

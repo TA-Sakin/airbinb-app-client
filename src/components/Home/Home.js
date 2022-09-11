@@ -1,29 +1,34 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 import Navigation from "../Header/Navigation";
 import Loading from "../shared/Loading";
 import PropertyList from "./PropertyList";
 import Search from "./Search";
 
 const Home = () => {
+  const { token } = useAuth();
   const [searchField, setSearchField] = useState("");
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState(properties);
   const [loading, setLoading] = useState(true);
   const onSearchChange = (e) => {
-    console.log(e.target.value);
     setSearchField(e.target.value.toLowerCase());
   };
 
   useEffect(() => {
-    fetch(
-      "https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=100&facet=city&facet=country&facet=property_type&facet=room_type&facet=bed_type&facet=amenities&facet=features"
-    )
+    fetch("http://localhost:5000/properties", {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${token || localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setProperties(data.records);
+        setProperties(data);
         setLoading(false);
       });
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     const newFilteredProperties = properties?.filter((property) =>
