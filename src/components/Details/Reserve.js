@@ -90,6 +90,8 @@ const Reserve = () => {
         customerName: user.displayName,
         phone,
         guests,
+        location: property.smart_location,
+        propertyType: property.property_type,
       };
       fetch("http://localhost:5000/reserve", {
         method: "POST",
@@ -101,7 +103,12 @@ const Reserve = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
-            toast.success(`${property.name} booked.`);
+            toast.success(
+              `${property.property_type} booked for ${format(
+                date[0].startDate,
+                "MM/dd/yyyy"
+              )} to ${format(date[0].endDate, "MM/dd/yyyy")}`
+            );
             setError("");
             setDate([
               {
@@ -117,6 +124,7 @@ const Reserve = () => {
         });
     }
   };
+
   if (!property) {
     return <Loading />;
   }

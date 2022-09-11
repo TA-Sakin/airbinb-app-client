@@ -10,7 +10,7 @@ const ProfileDropDown = () => {
       {user ? (
         <>
           <li>
-            <Link to="/dashboard/profile" className="justify-between">
+            <Link to="/dashboard" className="justify-between">
               Profile
             </Link>
           </li>
