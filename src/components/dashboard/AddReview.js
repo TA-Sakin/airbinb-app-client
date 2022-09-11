@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React, { useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { useParams } from "react-router-dom";
@@ -12,7 +13,7 @@ const AddReview = () => {
     setRating(newRating);
   };
   const { id } = useParams();
-
+  console.log(format(new Date(), "pp"));
   const handleSubmit = (e) => {
     e.preventDefault();
     const description = e.target.desc.value;

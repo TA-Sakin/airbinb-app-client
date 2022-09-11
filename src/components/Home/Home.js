@@ -6,7 +6,6 @@ import PropertyList from "./PropertyList";
 import Search from "./Search";
 
 const Home = () => {
-  const { token } = useAuth();
   const [searchField, setSearchField] = useState("");
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState(properties);
@@ -23,7 +22,7 @@ const Home = () => {
         setProperties(data);
         setLoading(false);
       });
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     const newFilteredProperties = properties?.filter((property) =>
