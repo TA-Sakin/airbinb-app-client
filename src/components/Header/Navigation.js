@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { VscThreeBars } from "react-icons/vsc";
 import ProfileDropDown from "./ProfileDropDown";
-const Navigation = () => {
+const Navigation = ({className}) => {
   return (
-    <div className="navbar sticky py-4 top-0 bg-white lg:px-20 md:px-16 px-8 shadow-md mb-10">
+    <div className={`navbar sticky py-4 top-0 bg-white  shadow-md mb-10 ${className}`}>
       <div className="navbar-start ">
         <div className="dropdown">
           <label tabIndex={0} className="cursor-pointer sm:hidden">

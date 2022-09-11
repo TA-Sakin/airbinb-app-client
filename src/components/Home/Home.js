@@ -11,18 +11,13 @@ const Home = () => {
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState(properties);
   const [loading, setLoading] = useState(true);
+
   const onSearchChange = (e) => {
     setSearchField(e.target.value.toLowerCase());
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/properties", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${token || localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch("http://localhost:5000/properties")
       .then((res) => res.json())
       .then((data) => {
         setProperties(data);
@@ -42,7 +37,7 @@ const Home = () => {
   }
   return (
     <div className="">
-      <Navigation />
+      <Navigation className="lg:px-20 md:px-16 px-8" />
       <Search onSearchHandler={onSearchChange} />
       <PropertyList properties={filteredProperties} />
     </div>

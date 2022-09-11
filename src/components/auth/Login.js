@@ -7,13 +7,14 @@ import { ToastContainer, toast } from "react-toastify";
 import Loading from "../shared/Loading";
 
 const Login = () => {
-  const { resetPassword, login, googleSignIn } = useAuth();
+  const { resetPassword, login, googleSignIn, token } = useAuth();
   const [loading, setLoading] = useState(false);
   const [popupLoading, setPopupLoading] = useState(false);
   const [error, setError] = useState();
   const [passwordResetError, setPasswordResetError] = useState();
 
   const navigate = useNavigate();
+  const location = useLocation();
   const [info, setInfo] = useState({
     email: "",
     password: "",
@@ -23,6 +24,7 @@ const Login = () => {
     password: "",
     infoError: "",
   });
+  let from = location.state?.from?.pathname || "/";
 
   const handleEmail = (e) => {
     if (e.target.value) {
@@ -61,7 +63,7 @@ const Login = () => {
         setError("");
         setLoading(true);
         await login(info.email, info.password);
-        navigate("/");
+        navigate(from, { replace: true });
       }
     } catch (err) {
       setLoading(false);
@@ -73,7 +75,7 @@ const Login = () => {
     try {
       setPopupLoading(true);
       await googleSignIn();
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (err) {
       setPopupLoading(false);
       setError(err);
@@ -122,9 +124,11 @@ const Login = () => {
       }
     }
   }, [error]);
+
   if (popupLoading) {
     return <Loading />;
   }
+
   return (
     <section className="">
       <div className="max-w-sm mx-auto my-20 bg-white p-8 rounded-xl shadow-lg shadow-slate-300">

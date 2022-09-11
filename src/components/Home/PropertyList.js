@@ -1,7 +1,6 @@
 import React from "react";
 import PropertyCard from "./PropertyCard";
 const PropertyList = ({ properties }) => {
-  console.log(properties);
   return (
     <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 justify-center mx-auto gap-5 lg:px-20 md:px-16 px-8">
       {properties?.map((property) => (
