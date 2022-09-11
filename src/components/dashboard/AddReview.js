@@ -13,7 +13,6 @@ const AddReview = () => {
     setRating(newRating);
   };
   const { id } = useParams();
-  console.log(format(new Date(), "pp"));
   const handleSubmit = (e) => {
     e.preventDefault();
     const description = e.target.desc.value;
@@ -23,6 +22,7 @@ const AddReview = () => {
         name: user?.displayName,
         rating: rating,
         description: description,
+        createdAt: format(new Date(), "PP"),
       };
       fetch("http://localhost:5000/review", {
         method: "POST",

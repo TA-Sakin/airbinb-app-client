@@ -5,7 +5,7 @@ import Navigation from "../Header/Navigation";
 const Dashboard = () => {
   return (
     <div>
-      <Navigation className="lg:px-16 px-8" />
+      <Navigation className="lg:px-16 px-8 z-50" />
       <div className="drawer drawer-mobile">
         <input
           id="dashboard-sidebar"

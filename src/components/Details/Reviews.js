@@ -40,10 +40,9 @@ const Reviews = ({ id }) => {
               </div>
             </div>
             <div>
-              <p className="text-gray-500 font-semibold mt-3">
-                {review.description}
-              </p>
+              <p className="text-gray-500 mt-3">{review.description}</p>
             </div>
+            <p className="mt-1">{review.createdAt}</p>
           </div>
         ))}
       </div>

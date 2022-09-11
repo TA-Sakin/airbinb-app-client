@@ -20,7 +20,6 @@ const Reserve = () => {
   const [openDate, setOpenDate] = useState(false);
   const [property, setProperty] = useState({});
   const { currentUser: user } = useAuth();
-  console.log(user.displayName);
   const [error, setError] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
@@ -188,7 +187,9 @@ const Reserve = () => {
             <div className="border-2 py-3 px-3 mt-3 rounded-xl max-w-sm">
               <span className="font-bold">
                 Price: $
-                {days ? parseInt(property?.price) * days : property?.price}
+                {days
+                  ? parseInt(property?.price) * days + ` for ${days} nights`
+                  : property?.price + " per night"}
               </span>
             </div>
           </div>
