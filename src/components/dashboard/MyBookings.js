@@ -8,7 +8,9 @@ const MyBookings = () => {
   const { currentUser: user } = useAuth();
   const [reserves, setReserves] = useState();
   useEffect(() => {
-    fetch(`http://localhost:5000/reserve?email=${user.email}`)
+    fetch(
+      `https://airbnb-app-server-production.up.railway.app/reserve?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setReserves(data));
   }, [user.email]);

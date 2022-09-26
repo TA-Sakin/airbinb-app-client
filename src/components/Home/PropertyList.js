@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import InfiniteScroll from "react-infinite-scroller";
+import Loading from "../shared/Loading";
 import PropertyCard from "./PropertyCard";
 const PropertyList = ({ properties }) => {
   return (

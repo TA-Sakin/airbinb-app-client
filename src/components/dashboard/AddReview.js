@@ -24,7 +24,7 @@ const AddReview = () => {
         description: description,
         createdAt: format(new Date(), "PP"),
       };
-      fetch("http://localhost:5000/review", {
+      fetch("https://airbnb-app-server-production.up.railway.app/review", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(review),

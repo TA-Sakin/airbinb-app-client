@@ -35,7 +35,7 @@ const Reserve = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reserve/${id}`)
+    fetch(`https://airbnb-app-server-production.up.railway.app/reserve/${id}`)
       .then((res) => res.json())
       .then((data) => setProperty(data.fields));
   }, [id]);
@@ -92,7 +92,7 @@ const Reserve = () => {
         location: property.smart_location,
         propertyType: property.property_type,
       };
-      fetch("http://localhost:5000/reserve", {
+      fetch("https://airbnb-app-server-production.up.railway.app/reserve", {
         method: "POST",
         headers: {
           "content-type": "application/json",

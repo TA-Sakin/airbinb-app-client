@@ -6,7 +6,7 @@ const Reviews = ({ id }) => {
   const [reviews, setReviews] = useState([]);
   let noReview;
   useEffect(() => {
-    fetch(`http://localhost:5000/review/${id}`)
+    fetch(`https://airbnb-app-server-production.up.railway.app/review/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data) {

@@ -7,13 +7,16 @@ const useToken = (user) => {
     const name = user?.displayName;
     const currentUser = { email, name };
     if (email) {
-      fetch(`http://localhost:5000/user/${email}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(currentUser),
-      })
+      fetch(
+        `https://airbnb-app-server-production.up.railway.app/user/${email}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           const accessToken = data.token;
